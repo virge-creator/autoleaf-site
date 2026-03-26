@@ -30,31 +30,9 @@ const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
           </div>
         </div>
         <div class="hidden lg:block">
-          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-            <div class="text-center text-white/60 text-sm mb-4">Live preview</div>
-            <div class="space-y-3">
-              <div class="bg-white/10 rounded-lg p-4 flex justify-between items-center">
-                <div>
-                  <p class="text-white font-semibold">Amnesia Haze</p>
-                  <p class="text-white/60 text-sm">Sativa · THC 22%</p>
-                </div>
-                <p class="text-leaf-light font-bold text-xl">€12,50</p>
-              </div>
-              <div class="bg-white/10 rounded-lg p-4 flex justify-between items-center">
-                <div>
-                  <p class="text-white font-semibold">Northern Lights</p>
-                  <p class="text-white/60 text-sm">Indica · THC 18%</p>
-                </div>
-                <p class="text-leaf-light font-bold text-xl">€11,00</p>
-              </div>
-              <div class="bg-white/5 rounded-lg p-4 flex justify-between items-center opacity-50">
-                <div>
-                  <p class="text-white font-semibold line-through">White Widow</p>
-                  <p class="text-white/60 text-sm">Uitverkocht</p>
-                </div>
-                <span class="text-red-400 text-sm">OP</span>
-              </div>
-            </div>
+          <div class="bg-black/40 backdrop-blur-sm rounded-2xl p-4 border border-white/20 shadow-2xl">
+            <div class="text-center text-white/60 text-sm mb-3">Live preview</div>
+            <img src={`${base}menu-preview.jpg`} alt="AutoLeaf menukaart display - coffeeshop prijslijst" class="rounded-lg shadow-lg w-full" />
           </div>
         </div>
       </div>
