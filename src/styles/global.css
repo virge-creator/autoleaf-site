@@ -43,6 +43,10 @@ h1, h2, h3, h4 {
   overflow: hidden;
 }
 
+.hero h1 {
+  color: white;
+}
+
 .hero::before {
   content: '';
   position: absolute;
