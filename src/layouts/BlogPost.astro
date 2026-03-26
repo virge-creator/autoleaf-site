@@ -1,0 +1,58 @@
+---
+import Layout from './Layout.astro';
+
+const { frontmatter } = Astro.props;
+const baseRaw = import.meta.env.BASE_URL;
+const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
+---
+
+<Layout title={frontmatter.title} description={frontmatter.description}>
+  <article class="py-12">
+    <div class="max-w-3xl mx-auto px-6">
+      <!-- Back link -->
+      <a href={`${base}blog/`} class="text-leaf hover:underline text-sm mb-8 inline-block">
+        ← Terug naar blog
+      </a>
+      
+      <!-- Header -->
+      <header class="mb-8">
+        <div class="flex items-center gap-4 text-sm text-gray-500 mb-4">
+          <time datetime={frontmatter.date}>{new Date(frontmatter.date).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          {frontmatter.tags && (
+            <span class="text-leaf">•</span>
+            <span>{frontmatter.tags[0]}</span>
+          )}
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold mb-4">
+          {frontmatter.title}
+        </h1>
+        {frontmatter.description && (
+          <p class="text-xl text-gray-600">{frontmatter.description}</p>
+        )}
+      </header>
+      
+      <!-- Content -->
+      <div class="blog-content">
+        <slot />
+      </div>
+      
+      <!-- Tags -->
+      {frontmatter.tags && (
+        <div class="mt-12 pt-8 border-t border-gray-200">
+          <div class="flex flex-wrap gap-2">
+            {frontmatter.tags.map((tag: string) => (
+              <span class="px-3 py-1 bg-cream rounded-full text-sm text-gray-600">{tag}</span>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      <!-- CTA -->
+      <div class="mt-12 p-8 bg-cream rounded-2xl text-center">
+        <h3 class="text-xl font-bold mb-2">Interesse in AutoLeaf?</h3>
+        <p class="text-gray-600 mb-4">Ontdek hoe wij uw coffeeshop kunnen digitaliseren.</p>
+        <a href={`${base}contact/`} class="btn-primary">Contact →</a>
+      </div>
+    </div>
+  </article>
+</Layout>

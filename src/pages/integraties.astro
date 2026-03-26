@@ -1,0 +1,153 @@
+---
+import Layout from '../layouts/Layout.astro';
+const baseRaw = import.meta.env.BASE_URL;
+const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
+---
+
+<Layout title="Integraties" description="AutoLeaf Displays integreert naadloos met EBPos en Vectron Commander kassasystemen voor coffeeshops.">
+  
+  <!-- Hero -->
+  <section class="hero py-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6">
+          Kassa <span class="text-leaf-light">integraties</span>
+        </h1>
+        <p class="text-xl text-white/80">
+          AutoLeaf werkt naadloos samen met de populairste kassasystemen in de coffeeshop branche.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integrations -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      
+      <!-- EBPos -->
+      <div class="grid lg:grid-cols-2 gap-16 items-center mb-20">
+        <div>
+          <div class="inline-block bg-leaf/10 text-leaf font-semibold text-sm px-4 py-2 rounded-full mb-4">
+            Volledige integratie
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-bold mb-6">EBPos</h2>
+          <p class="text-gray-600 mb-6 text-lg">
+            EBPos is een van de meest gebruikte kassasystemen onder coffeeshops in Nederland. 
+            AutoLeaf haalt real-time voorraad en prijsinformatie direct uit uw EBPos kassa.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-leaf text-xl">✓</span>
+              <span>Real-time voorraad synchronisatie</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-leaf text-xl">✓</span>
+              <span>Automatische prijsupdates</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-leaf text-xl">✓</span>
+              <span>Productcategorieën overnemen</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-leaf text-xl">✓</span>
+              <span>THC/CBD percentages importeren</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-cream rounded-2xl p-12 text-center">
+          <div class="text-7xl mb-4">💳</div>
+          <h3 class="text-2xl font-bold text-forest">EBPos</h3>
+          <p class="text-gray-500 mt-2">Kassasysteem</p>
+        </div>
+      </div>
+
+      <!-- Vectron -->
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="order-2 lg:order-1 bg-cream rounded-2xl p-12 text-center">
+          <div class="text-7xl mb-4">🖥️</div>
+          <h3 class="text-2xl font-bold text-forest">Vectron Commander</h3>
+          <p class="text-gray-500 mt-2">Kassasysteem</p>
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="inline-block bg-leaf/10 text-leaf font-semibold text-sm px-4 py-2 rounded-full mb-4">
+            Volledige integratie
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-bold mb-6">Vectron Commander</h2>
+          <p class="text-gray-600 mb-6 text-lg">
+            Vectron Commander is bekend om zijn robuustheid en wordt veel gebruikt in de horeca en retail. 
+            Onze integratie zorgt voor een vlekkeloze koppeling.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-leaf text-xl">✓</span>
+              <span>Directe API-koppeling</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-leaf text-xl">✓</span>
+              <span>Bidirectionele synchronisatie</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-leaf text-xl">✓</span>
+              <span>Multi-vestiging support</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-leaf text-xl">✓</span>
+              <span>Rapportage en analytics</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- How integration works -->
+  <section class="section-cream py-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Hoe werkt de integratie?</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Wij regelen de technische koppeling. U hoeft alleen akkoord te geven.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-leaf text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
+          <h3 class="font-bold mb-2">Intake</h3>
+          <p class="text-gray-600 text-sm">We inventariseren uw huidige kassasysteem en wensen.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-leaf text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
+          <h3 class="font-bold mb-2">Koppeling</h3>
+          <p class="text-gray-600 text-sm">Onze technici maken de verbinding met uw kassa.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-leaf text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">3</div>
+          <h3 class="font-bold mb-2">Test</h3>
+          <p class="text-gray-600 text-sm">We testen de synchronisatie grondig voordat u live gaat.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-leaf text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">4</div>
+          <h3 class="font-bold mb-2">Live</h3>
+          <p class="text-gray-600 text-sm">Uw displays zijn gekoppeld en werken automatisch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other systems -->
+  <section class="py-20">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ander kassasysteem?</h2>
+      <p class="text-lg text-gray-600 mb-8">
+        Gebruikt u een ander kassasysteem? Neem contact met ons op. 
+        We onderzoeken graag de mogelijkheden voor een maatwerkintegratie.
+      </p>
+      <a href={`${base}contact/`} class="btn-primary">
+        Contact opnemen →
+      </a>
+    </div>
+  </section>
+
+</Layout>

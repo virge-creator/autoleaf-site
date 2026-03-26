@@ -1,0 +1,214 @@
+---
+import Layout from '../layouts/Layout.astro';
+const baseRaw = import.meta.env.BASE_URL;
+const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
+---
+
+<Layout title="Home" description="AutoLeaf Displays - Professionele digitale menukaarten voor coffeeshops. Real-time prijslijsten op grote schermen, mobiele app voor productinfo, en kassa-integraties.">
+  
+  <!-- Hero Section -->
+  <section class="hero min-h-[85vh] flex items-center relative">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-leaf-light font-medium tracking-wider uppercase mb-4 text-sm">Voor professionele coffeeshops</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Digitale menukaarten die <span class="text-leaf-light">meedenken</span>
+          </h1>
+          <p class="text-xl text-white/80 mb-8 leading-relaxed">
+            AutoLeaf is het complete display-systeem voor coffeeshops in de wietproef. 
+            Real-time prijslijsten op grote schermen, automatische voorraad-updates, 
+            en een mobiele app voor uitgebreide productinformatie.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href={`${base}contact/`} class="btn-primary text-center">
+              Gratis demo aanvragen →
+            </a>
+            <a href={`${base}functies/`} class="btn-secondary text-center">
+              Bekijk functies
+            </a>
+          </div>
+        </div>
+        <div class="hidden lg:block">
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <div class="text-center text-white/60 text-sm mb-4">Live preview</div>
+            <div class="space-y-3">
+              <div class="bg-white/10 rounded-lg p-4 flex justify-between items-center">
+                <div>
+                  <p class="text-white font-semibold">Amnesia Haze</p>
+                  <p class="text-white/60 text-sm">Sativa · THC 22%</p>
+                </div>
+                <p class="text-leaf-light font-bold text-xl">€12,50</p>
+              </div>
+              <div class="bg-white/10 rounded-lg p-4 flex justify-between items-center">
+                <div>
+                  <p class="text-white font-semibold">Northern Lights</p>
+                  <p class="text-white/60 text-sm">Indica · THC 18%</p>
+                </div>
+                <p class="text-leaf-light font-bold text-xl">€11,00</p>
+              </div>
+              <div class="bg-white/5 rounded-lg p-4 flex justify-between items-center opacity-50">
+                <div>
+                  <p class="text-white font-semibold line-through">White Widow</p>
+                  <p class="text-white/60 text-sm">Uitverkocht</p>
+                </div>
+                <span class="text-red-400 text-sm">OP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent"></div>
+  </section>
+
+  <!-- Stats -->
+  <section class="py-16 -mt-12 relative z-10">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="bg-white rounded-2xl shadow-xl p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="stat-item">
+          <p class="stat-number">100+</p>
+          <p class="text-gray-600 text-sm mt-2">Soorten support</p>
+        </div>
+        <div class="stat-item">
+          <p class="stat-number">2</p>
+          <p class="text-gray-600 text-sm mt-2">Kassa integraties</p>
+        </div>
+        <div class="stat-item">
+          <p class="stat-number">24/7</p>
+          <p class="text-gray-600 text-sm mt-2">Live updates</p>
+        </div>
+        <div class="stat-item">
+          <p class="stat-number">NL</p>
+          <p class="text-gray-600 text-sm mt-2">Wietproef ready</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Overview -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Alles voor uw digitale menukaart</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Van real-time prijsweergave tot klantgerichte productinformatie — AutoLeaf heeft alles in huis.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="feature-card">
+          <div class="text-5xl mb-6">📺</div>
+          <h3 class="text-xl font-bold mb-3 text-forest">Display Systeem</h3>
+          <p class="text-gray-600">
+            Projecteer uw volledige assortiment op grote schermen. Uitverkochte producten verdwijnen automatisch.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="text-5xl mb-6">📱</div>
+          <h3 class="text-xl font-bold mb-3 text-forest">Mobiele App</h3>
+          <p class="text-gray-600">
+            Geef klanten uitgebreide productinfo via hun smartphone. Effecten, smaken, herkomst en meer.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="text-5xl mb-6">🔗</div>
+          <h3 class="text-xl font-bold mb-3 text-forest">Kassa Integratie</h3>
+          <p class="text-gray-600">
+            Naadloze koppeling met EBPos en Vectron Commander. Voorraad altijd up-to-date.
+          </p>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href={`${base}functies/`} class="btn-outline">
+          Alle functies bekijken →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section-cream py-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Hoe werkt het?</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          In drie stappen van traditionele krijtborden naar professionele digitale displays.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-leaf text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">1</div>
+          <h3 class="text-xl font-bold mb-3">Koppel uw kassa</h3>
+          <p class="text-gray-600">
+            Wij verbinden AutoLeaf met uw bestaande kassasysteem. Geen dubbel werk meer.
+          </p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-leaf text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">2</div>
+          <h3 class="text-xl font-bold mb-3">Configureer displays</h3>
+          <p class="text-gray-600">
+            Bepaal welke producten op welk scherm. Pas kleuren en layout aan uw huisstijl aan.
+          </p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-leaf text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">3</div>
+          <h3 class="text-xl font-bold mb-3">Ga live</h3>
+          <p class="text-gray-600">
+            Uw menukaart draait. Verkochte producten verdwijnen automatisch. Klanten gebruiken de app.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integrations -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Kassa Integraties</h2>
+        <p class="text-lg text-gray-600">
+          Werkt naadloos met de meest gebruikte kassasystemen in de branche.
+        </p>
+      </div>
+      
+      <div class="flex flex-wrap justify-center items-center gap-12">
+        <div class="text-center p-8 rounded-xl border border-gray-200 hover:border-leaf transition-colors">
+          <div class="text-4xl mb-3">💳</div>
+          <p class="font-bold text-lg">EBPos</p>
+          <p class="text-gray-500 text-sm">Volledige integratie</p>
+        </div>
+        <div class="text-center p-8 rounded-xl border border-gray-200 hover:border-leaf transition-colors">
+          <div class="text-4xl mb-3">🖥️</div>
+          <p class="font-bold text-lg">Vectron Commander</p>
+          <p class="text-gray-500 text-sm">Volledige integratie</p>
+        </div>
+      </div>
+      
+      <div class="text-center mt-8">
+        <p class="text-gray-500">Ander kassasysteem? <a href={`${base}contact/`} class="text-leaf font-semibold hover:underline">Neem contact op</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-forest py-20">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-6">Klaar voor professionele displays?</h2>
+      <p class="text-xl text-white/80 mb-8">
+        Plan een gratis demo en ontdek hoe AutoLeaf uw coffeeshop naar een hoger niveau tilt.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={`${base}contact/`} class="btn-primary bg-white !text-forest hover:!bg-white/90">
+          Gratis demo aanvragen
+        </a>
+        <a href="tel:+31201234567" class="btn-secondary">
+          Bel ons direct
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
