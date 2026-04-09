@@ -250,6 +250,31 @@ h1, h2, h3, h4 {
   color: var(--color-gray-warm);
 }
 
+.blog-content table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.blog-content th,
+.blog-content td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border: 1px solid rgba(61, 122, 80, 0.2);
+}
+
+.blog-content th {
+  background-color: var(--color-cream);
+  font-weight: 600;
+  color: var(--color-forest);
+  text-align: left;
+}
+
+.blog-content tr:hover {
+  background-color: rgba(61, 122, 80, 0.05);
+}
+
 /* Navigation */
 nav a {
   position: relative;
