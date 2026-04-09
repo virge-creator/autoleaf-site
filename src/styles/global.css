@@ -6,21 +6,33 @@
     display: none;
   }
   
+  /* Mobile-first: show by default, hide on md+ */
+  .hide-on-desktop {
+    display: block;
+  }
   @media (min-width: 768px) {
-    .md\:hidden {
+    .hide-on-desktop {
       display: none;
     }
-    .md\:flex {
+  }
+  
+  /* Desktop-first: hide by default, show on md+ */
+  .show-on-desktop {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .show-on-desktop {
       display: flex;
     }
   }
   
+  /* Custom lg breakpoint */
+  .show-on-lg {
+    display: none;
+  }
   @media (min-width: 1024px) {
-    .lg\:block {
+    .show-on-lg {
       display: block;
-    }
-    .lg\:hidden {
-      display: none;
     }
   }
 }
