@@ -56,3 +56,29 @@ const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
     </div>
   </article>
 </Layout>
+
+<style is:global>
+  .blog-content table {
+    width: 100%;
+    margin: 1.5rem 0;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .blog-content th,
+  .blog-content td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid rgba(61, 122, 80, 0.2);
+  }
+
+  .blog-content th {
+    background-color: #f8faf9;
+    font-weight: 600;
+    color: #163020;
+  }
+
+  .blog-content tr:hover {
+    background-color: rgba(61, 122, 80, 0.05);
+  }
+</style>
