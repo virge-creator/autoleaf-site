@@ -3,8 +3,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://virge-creator.github.io',
-  base: '/autoleaf-site',
+  site: 'https://autoleaf.nl',
+  base: '/',
   vite: {
     plugins: [tailwindcss()],
   },
