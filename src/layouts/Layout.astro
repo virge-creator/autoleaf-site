@@ -31,9 +31,9 @@ const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
         <div class="flex items-center justify-between">
           <a href={`${base}`} class="flex items-center gap-3">
             <!-- Mobile: icon logo -->
-            <img src={`${base}logo-icon.png`} alt="AutoLeaf" class="h-10 block md:hidden" />
+            <img src={`${base}logo-icon.png`} alt="AutoLeaf" class="h-10 hide-on-desktop" />
             <!-- Desktop: wide logo -->
-            <img src={`${base}logo-wide.jpg`} alt="AutoLeaf Displays" class="h-12 hidden md:block" />
+            <img src={`${base}logo-wide.jpg`} alt="AutoLeaf Displays" class="h-12 show-on-desktop-block" />
           </a>
           <div class="show-on-desktop items-center gap-8 text-sm font-medium">
             <a href={`${base}`} class="text-white/80 hover:text-white transition-colors">Home</a>
