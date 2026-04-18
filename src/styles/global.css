@@ -365,6 +365,22 @@ footer a:hover {
   width: 100%;
 }
 
+/* Active contact button - gold */
+.btn-primary-active {
+  background: #C9A94E;
+  color: white;
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-active:hover {
+  background: #E5C866;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201, 169, 78, 0.3);
+}
+
 /* Leaf decoration */
 .leaf-pattern {
   position: absolute;
