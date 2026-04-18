@@ -30,7 +30,7 @@ const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
           </div>
         </div>
         <div>
-          <p class="text-center text-white/50 text-sm mb-4 tracking-wider uppercase">Live preview</p>
+          <p class="text-center text-white/50 text-sm mb-4 tracking-wider uppercase" id="carousel-title" style="transition: opacity 0.2s ease;">Menukaart Display</p>
           
           <!-- Carousel with external arrows -->
           <div class="flex items-center gap-3">
@@ -240,9 +240,19 @@ const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
   const dots = document.querySelectorAll('.carousel-dot');
   const prevBtn = document.getElementById('carousel-prev');
   const nextBtn = document.getElementById('carousel-next');
+  const titleEl = document.getElementById('carousel-title');
   let current = 0;
   const total = 6;
   let autoplayTimer;
+
+  const titles = [
+    'Menukaart Display',
+    'Coffeeshop Menukaart',
+    'Admin Dashboard',
+    'Kiosk Mode',
+    'Product Detail',
+    'Onze Partners',
+  ];
 
   function goTo(index) {
     current = ((index % total) + total) % total;
@@ -251,6 +261,10 @@ const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
       d.classList.toggle('bg-white/80', i === current);
       d.classList.toggle('bg-white/30', i !== current);
     });
+    if (titleEl) {
+      titleEl.style.opacity = '0';
+      setTimeout(() => { titleEl.textContent = titles[current]; titleEl.style.opacity = '1'; }, 200);
+    }
   }
 
   function startAutoplay() {
