@@ -39,9 +39,7 @@ const navItems = [
         <div class="flex items-center justify-between">
           <a href={`${base}`} class="flex items-center gap-3">
             <!-- Mobile: icon logo -->
-            <img src={`${base}logo-icon.png`} alt="AutoLeaf" class="h-10 hide-on-desktop" />
-            <!-- Desktop: wide logo -->
-            <img src={`${base}logo-wide.png`} alt="AutoLeaf Displays" class="h-12 show-on-desktop-block" />
+            <img src={`${base}logo-wide.png`} alt="AutoLeaf Displays" class="h-10 md:h-12" />
           </a>
           <div class="show-on-desktop items-center gap-8 text-sm font-medium">
             {navItems.map(item => (
