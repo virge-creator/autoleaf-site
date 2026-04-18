@@ -344,6 +344,27 @@ footer a:hover {
   color: #E5C866;
 }
 
+/* Nav active link with animated underline */
+.nav-link {
+  padding-bottom: 2px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: #C9A94E;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-active::after {
+  width: 100%;
+}
+
 /* Leaf decoration */
 .leaf-pattern {
   position: absolute;

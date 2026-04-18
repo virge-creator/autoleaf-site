@@ -9,6 +9,14 @@ interface Props {
 const { title, description = "AutoLeaf Displays - Professionele digitale menukaarten voor coffeeshops in de Nederlandse wietproef" } = Astro.props;
 const baseRaw = import.meta.env.BASE_URL;
 const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
+const path = Astro.url.pathname;
+
+const navItems = [
+  { href: `${base}`, label: 'Home', match: (p: string) => p === '/' || p === base },
+  { href: `${base}functies/`, label: 'Functies', match: (p: string) => p.includes('functies') },
+  { href: `${base}integraties/`, label: 'Integraties', match: (p: string) => p.includes('integraties') },
+  { href: `${base}blog/`, label: 'Blog', match: (p: string) => p.includes('blog') },
+];
 ---
 
 <!doctype html>
@@ -36,22 +44,38 @@ const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
             <img src={`${base}logo-wide.png`} alt="AutoLeaf Displays" class="h-12 show-on-desktop-block" />
           </a>
           <div class="show-on-desktop items-center gap-8 text-sm font-medium">
-            <a href={`${base}`} class="text-white/80 hover:text-[#C9A94E] transition-colors">Home</a>
-            <a href={`${base}functies/`} class="text-white/80 hover:text-[#C9A94E] transition-colors">Functies</a>
-            <a href={`${base}integraties/`} class="text-white/80 hover:text-[#C9A94E] transition-colors">Integraties</a>
-            <a href={`${base}blog/`} class="text-white/80 hover:text-[#C9A94E] transition-colors">Blog</a>
+            {navItems.map(item => (
+              <a 
+                href={item.href}
+                class={`nav-link transition-colors relative ${
+                  item.match(path) 
+                    ? 'text-[#C9A94E] nav-active' 
+                    : 'text-white/80 hover:text-[#C9A94E]'
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
             <a href={`${base}contact/`} class="btn-primary text-sm !py-2 !px-4">Contact</a>
           </div>
           <!-- Mobile menu button -->
           <button class="hide-on-desktop text-white text-2xl" id="mobile-menu-btn">☰</button>
         </div>
         <!-- Mobile menu -->
-        <div class="hide-on-desktop hidden pt-4 pb-2" id="mobile-menu">
+        <div class="hide-on-desktop hidden flex-col pt-4 pb-2" id="mobile-menu">
           <div class="flex flex-col gap-4">
-            <a href={`${base}`} class="text-white/80 hover:text-[#C9A94E]">Home</a>
-            <a href={`${base}functies/`} class="text-white/80 hover:text-[#C9A94E]">Functies</a>
-            <a href={`${base}integraties/`} class="text-white/80 hover:text-[#C9A94E]">Integraties</a>
-            <a href={`${base}blog/`} class="text-white/80 hover:text-[#C9A94E]">Blog</a>
+            {navItems.map(item => (
+              <a 
+                href={item.href}
+                class={`nav-link transition-colors relative ${
+                  item.match(path) 
+                    ? 'text-[#C9A94E] nav-active' 
+                    : 'text-white/80 hover:text-[#C9A94E]'
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
             <a href={`${base}contact/`} class="btn-primary text-center">Contact</a>
           </div>
         </div>
@@ -102,8 +126,25 @@ const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
     </footer>
 
     <script>
-      document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
-        document.getElementById('mobile-menu')?.classList.toggle('hidden');
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      let isOpen = false;
+
+      function toggleMenu() {
+        isOpen = !isOpen;
+        menu?.classList.toggle('hidden', !isOpen);
+        menu?.classList.toggle('flex', isOpen);
+        btn!.textContent = isOpen ? '✕' : '☰';
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      }
+
+      btn?.addEventListener('click', toggleMenu);
+
+      // Close on link click
+      menu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (isOpen) toggleMenu();
+        });
       });
     </script>
   </body>
