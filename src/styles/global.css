@@ -335,13 +335,13 @@ footer {
 }
 
 footer a {
-  color: var(--color-mint);
+  color: #C9A94E;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 footer a:hover {
-  color: white;
+  color: #E5C866;
 }
 
 /* Leaf decoration */
