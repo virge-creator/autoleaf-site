@@ -47,7 +47,7 @@ Pushing to `main` triggers `.github/workflows/deploy.yml`, which runs `npm ci &&
 
 ### Shows album (`/shows/`)
 
-Unlisted fullscreen photo carousel shared directly with customers. It's not in the nav, has a `noindex` meta tag and is blocked in `public/robots.txt`. Photos are dropped in `src/assets/shows/` and optimized to WebP srcsets at build time via `getImage()`. They are sorted by filename (numeric-aware, so use `01-…` prefixes) and split into Liggend/Staand sets by their pixel dimensions. `src/pages/shows/index.astro` is standalone (it doesn't use `Layout.astro`) to maximize screen space. Swiping is native CSS scroll-snap. Its "Demo" button links to `/contact/?demo=1`, which prefills the contact message.
+Unlisted fullscreen photo carousel shared directly with customers. It's not in the nav, has a `noindex` meta tag and is blocked in `public/robots.txt`. Photos are dropped in `src/assets/shows/` and optimized to WebP srcsets at build time via `getImage()`. They are sorted by filename (numeric-aware, so use `01-…` prefixes) and split into Liggend/Staand sets by their pixel dimensions. `src/pages/shows/index.astro` is standalone (it doesn't use `Layout.astro`) to maximize screen space. Swiping is native CSS scroll-snap. Its "Demo" button links to `/contact/?demo=1`, which prefills the contact message. `src/assets/shows/sources.json` records which price-list URL each screenshot came from; use the `add-show-image` skill (`.claude/skills/add-show-image/`) to add or replace screenshots.
 
 ### Forms
 
