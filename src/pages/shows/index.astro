@@ -1,0 +1,372 @@
+---
+// Unlisted photo album of AutoLeaf price list displays, shared directly with customers.
+// Drop images in src/assets/shows/ — they are ordered by filename and split into
+// landscape/portrait automatically. Not linked from the nav; blocked in robots.txt.
+import '../../styles/global.css';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const baseRaw = import.meta.env.BASE_URL;
+const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
+
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/shows/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+
+const WIDTHS = [800, 1400, 2200, 3000];
+
+const photos = await Promise.all(
+  Object.entries(files)
+    .sort(([a], [b]) => a.localeCompare(b, 'nl', { numeric: true }))
+    .map(async ([path, mod]) => {
+      const meta = mod.default;
+      const widths = WIDTHS.filter((w) => w < meta.width).concat(meta.width);
+      const img = await getImage({ src: meta, widths, format: 'webp' });
+      const name = path.split('/').pop()!.replace(/\.[^.]+$/, '');
+      return {
+        src: img.src,
+        srcset: img.srcSet.attribute,
+        width: meta.width,
+        height: meta.height,
+        alt: name.replace(/^\d+[-_ ]*/, '').replace(/[-_]+/g, ' ') || 'AutoLeaf display',
+        landscape: meta.width >= meta.height,
+      };
+    })
+);
+
+const sets = [
+  { key: 'liggend', label: 'Liggend', photos: photos.filter((p) => p.landscape) },
+  { key: 'staand', label: 'Staand', photos: photos.filter((p) => !p.landscape) },
+].filter((s) => s.photos.length > 0);
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#0B211D" />
+    <link rel="icon" type="image/png" href={`${base}favicon.png`} />
+    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Shows | AutoLeaf Displays</title>
+  </head>
+  <body class="shows">
+    <!-- Top bar -->
+    <header class="bar bar-top chrome">
+      <a href={`${base}`} class="shrink-0" aria-label="Naar home">
+        <img src={`${base}logo-wide.png`} alt="AutoLeaf Displays" class="h-8 sm:h-10" />
+      </a>
+      <nav class="flex items-center gap-2 sm:gap-3 text-sm font-semibold">
+        <a href={`${base}contact/`} class="bar-link">Contact</a>
+        <a href={`${base}contact/?demo=1`} class="btn-primary !py-2 !px-4 text-sm">Demo</a>
+      </nav>
+    </header>
+
+    {sets.length === 0 ? (
+      <main class="empty">
+        <p>Nog geen foto's. Kom snel terug!</p>
+      </main>
+    ) : (
+      <main>
+        {sets.map((set) => (
+          <div class="track" data-set={set.key} tabindex="-1" hidden>
+            {set.photos.map((p, i) => (
+              <figure class="slide">
+                <img
+                  src={p.src}
+                  srcset={p.srcset}
+                  sizes="100vw"
+                  width={p.width}
+                  height={p.height}
+                  alt={p.alt}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  draggable="false"
+                />
+              </figure>
+            ))}
+          </div>
+        ))}
+
+        <button class="arrow arrow-prev chrome" id="prev" aria-label="Vorige foto">‹</button>
+        <button class="arrow arrow-next chrome" id="next" aria-label="Volgende foto">›</button>
+
+        <!-- Bottom bar -->
+        <footer class="bar bar-bottom chrome">
+          <div class="flex-1"></div>
+          {sets.length > 1 && (
+            <div class="toggle" role="tablist" aria-label="Oriëntatie">
+              {sets.map((set) => (
+                <button role="tab" data-set={set.key}>
+                  {set.label} <span class="opacity-60">{set.photos.length}</span>
+                </button>
+              ))}
+            </div>
+          )}
+          <div class="flex-1 flex items-center justify-end gap-3">
+            <span class="counter" id="counter"></span>
+            <button class="icon-btn" id="fullscreen" aria-label="Volledig scherm" hidden>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg>
+            </button>
+          </div>
+        </footer>
+      </main>
+    )}
+
+    <script>
+      const tracks = Array.from(document.querySelectorAll<HTMLElement>('.track'));
+      const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.toggle button'));
+      const counter = document.getElementById('counter');
+      const prevBtn = document.getElementById('prev');
+      const nextBtn = document.getElementById('next');
+      const fsBtn = document.getElementById('fullscreen');
+      const portraitQuery = window.matchMedia('(orientation: portrait)');
+
+      let active: HTMLElement | undefined;
+      let index = 0;
+      let userPicked = false;
+      let lockUntil = 0; // ignore scroll events while a button-triggered scroll animates
+
+      const count = () => active?.children.length ?? 0;
+
+      function updateUi() {
+        if (!active) return;
+        if (counter) counter.textContent = `${index + 1} / ${count()}`;
+        if (prevBtn) prevBtn.hidden = index === 0;
+        if (nextBtn) nextBtn.hidden = index >= count() - 1;
+        history.replaceState(null, '', `#${active.dataset.set}-${index + 1}`);
+      }
+
+      function goTo(i: number, smooth = true) {
+        if (!active) return;
+        index = Math.max(0, Math.min(count() - 1, i));
+        if (smooth) lockUntil = Date.now() + 600;
+        active.scrollTo({ left: index * active.clientWidth, behavior: smooth ? 'smooth' : 'instant' });
+        updateUi();
+      }
+
+      function showSet(key: string, i = 0) {
+        const next = tracks.find((t) => t.dataset.set === key) ?? tracks[0];
+        if (!next) return;
+        tracks.forEach((t) => (t.hidden = t !== next));
+        tabs.forEach((b) => b.setAttribute('aria-selected', String(b.dataset.set === next.dataset.set)));
+        active = next;
+        goTo(i, false);
+      }
+
+      // Track the visible slide while the user swipes (scroll-snap does the actual motion).
+      tracks.forEach((track) => {
+        let raf = 0;
+        track.addEventListener('scroll', () => {
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => {
+            if (track !== active || Date.now() < lockUntil) return;
+            const i = Math.round(track.scrollLeft / track.clientWidth);
+            if (i !== index) {
+              index = i;
+              updateUi();
+            }
+          });
+        }, { passive: true });
+
+        // Tap toggles the bars for an unobstructed view.
+        track.addEventListener('click', () => document.body.classList.toggle('immersive'));
+      });
+
+      tabs.forEach((b) => b.addEventListener('click', () => {
+        userPicked = true;
+        showSet(b.dataset.set!);
+      }));
+
+      prevBtn?.addEventListener('click', () => goTo(index - 1));
+      nextBtn?.addEventListener('click', () => goTo(index + 1));
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(index - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); goTo(index + 1); }
+      });
+
+      // Keep the current photo in place when the screen rotates or resizes.
+      window.addEventListener('resize', () => goTo(index, false));
+
+      // Follow the device orientation until the user picks a set themselves.
+      portraitQuery.addEventListener('change', () => {
+        if (!userPicked) showSet(portraitQuery.matches ? 'staand' : 'liggend');
+      });
+
+      if (fsBtn && document.fullscreenEnabled) {
+        fsBtn.hidden = false;
+        fsBtn.addEventListener('click', () => {
+          if (document.fullscreenElement) document.exitFullscreen();
+          else document.documentElement.requestFullscreen();
+        });
+      }
+
+      // Initial state: deep link (#staand-3) wins, otherwise match the device orientation.
+      const m = location.hash.match(/^#(liggend|staand)-(\d+)$/);
+      if (m) {
+        userPicked = true;
+        showSet(m[1], Number(m[2]) - 1);
+      } else {
+        showSet(portraitQuery.matches ? 'staand' : 'liggend');
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  [hidden] { display: none !important; }
+
+  html:has(body.shows) { scroll-behavior: auto; }
+
+  body.shows {
+    margin: 0;
+    height: 100dvh;
+    overflow: hidden;
+    overscroll-behavior: none;
+    background: #000;
+    color: white;
+    line-height: 1.4;
+  }
+
+  .shows .bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .shows .bar-top {
+    top: 0;
+    padding-top: max(0.625rem, env(safe-area-inset-top));
+    padding-bottom: 0.625rem;
+    background: linear-gradient(to bottom, rgba(11, 33, 29, 0.85), rgba(11, 33, 29, 0));
+  }
+
+  .shows .bar-bottom {
+    bottom: 0;
+    padding-top: 0.75rem;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+    background: linear-gradient(to top, rgba(11, 33, 29, 0.85), rgba(11, 33, 29, 0));
+  }
+
+  .shows .bar-link {
+    color: rgba(255, 255, 255, 0.85);
+    padding: 0.5rem 0.75rem;
+  }
+  .shows .bar-link:hover { color: #C9A94E; }
+
+  .shows .chrome { transition: opacity 0.25s ease; }
+  .shows.immersive .chrome { opacity: 0; pointer-events: none; }
+
+  .shows .track {
+    display: flex;
+    height: 100dvh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    outline: none;
+  }
+  .shows .track::-webkit-scrollbar { display: none; }
+
+  .shows .slide {
+    flex: 0 0 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .shows .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  .shows .toggle {
+    display: flex;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 3px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .shows .toggle button {
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .shows .toggle button[aria-selected='true'] {
+    background: var(--color-leaf);
+    color: white;
+  }
+
+  .shows .counter {
+    font-size: 0.875rem;
+    font-variant-numeric: tabular-nums;
+    color: rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+  }
+
+  .shows .icon-btn {
+    display: flex;
+    padding: 0.4rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .shows .arrow {
+    display: none;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-size: 2rem;
+    line-height: 1;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0.2rem;
+  }
+  .shows .arrow:hover { background: rgba(255, 255, 255, 0.25); }
+  .shows .arrow-prev { left: max(1rem, env(safe-area-inset-left)); }
+  .shows .arrow-next { right: max(1rem, env(safe-area-inset-right)); }
+  @media (hover: hover) and (pointer: fine) {
+    .shows .arrow { display: flex; }
+  }
+
+  .shows .empty {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.7);
+  }
+</style>

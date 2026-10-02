@@ -43,6 +43,10 @@ Pushing to `main` triggers `.github/workflows/deploy.yml`, which runs `npm ci &&
 - `src/pages/blog/index.astro` discovers posts via `import.meta.glob('./*.md')` and sorts by `date`. Posts **must be `.md`** (not `.astro`/`.mdx`) to appear in the index.
 - Posts may embed raw HTML/`<script>` — e.g. the Germany post loads Chart.js from jsDelivr for an inline chart.
 
+### Shows album (`/shows/`)
+
+Unlisted fullscreen photo carousel shared directly with customers. It's not in the nav, has a `noindex` meta tag and is blocked in `public/robots.txt`. Photos are dropped in `src/assets/shows/` and optimized to WebP srcsets at build time via `getImage()`. They are sorted by filename (numeric-aware, so use `01-…` prefixes) and split into Liggend/Staand sets by their pixel dimensions. `src/pages/shows/index.astro` is standalone (it doesn't use `Layout.astro`) to maximize screen space. Swiping is native CSS scroll-snap. Its "Demo" button links to `/contact/?demo=1`, which prefills the contact message.
+
 ### Forms
 
 Contact form (`contact.astro`) and the newsletter signup (`blog/index.astro`) both POST to Formspree (`https://formspree.io/f/mkokrkdl`); there is no backend.
