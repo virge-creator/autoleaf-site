@@ -6,8 +6,6 @@ date: 2026-03-26
 tags: ["Klantbeleving", "Digitale Displays", "Innovatie"]
 ---
 
-# Hoe Digitale Displays de Klantbeleving in Coffeeshops Verbeteren
-
 De moderne coffeeshop is niet meer te vergelijken met tien jaar geleden. Met de wietproef en het groeiende assortiment legaal geteelde cannabis, staan ondernemers voor een nieuwe uitdaging: hoe presenteer je 100+ producten op een overzichtelijke manier?
 
 ## Hoe doen coffeeshops het nu?

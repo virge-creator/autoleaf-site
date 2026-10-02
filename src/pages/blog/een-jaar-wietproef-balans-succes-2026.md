@@ -7,8 +7,6 @@ author: "AutoLeaf"
 image: "/images/blog/wietproef-een-jaar.jpg"
 ---
 
-# Eén Jaar Wietproef: De Balans na 12 Maanden Legale Teelt
-
 April 2026 markeert een historisch moment: de Nederlandse wietproef draait nu precies één jaar. Wat begon als een gewaagd experiment om het "achterdeurprobleem" op te lossen, lijkt uit te groeien tot een blijvend succes. Maar hoe staat het er echt voor?
 
 ## De Cijfers: 42 Overtredingen, Geen Criminelen

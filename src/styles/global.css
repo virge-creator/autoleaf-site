@@ -59,8 +59,8 @@
   --color-charcoal: #1a1a1a;
   --color-gray-warm: #4a4a4a;
   
-  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 html {

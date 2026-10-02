@@ -6,8 +6,6 @@ date: 2026-03-26
 tags: ["Duitsland", "Medicinale Cannabis", "Marktanalyse"]
 ---
 
-# Van 32 naar 200 Ton: De Explosie van Medicinale Cannabis in Duitsland
-
 Onze oosterburen hebben een ware cannabisrevolutie doorgemaakt. Sinds de legalisering in april 2024 is de Duitse medicinale cannabismarkt geëxplodeerd. De cijfers liegen er niet om.
 
 ## De cijfers op een rij

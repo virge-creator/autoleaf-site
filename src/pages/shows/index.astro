@@ -2,6 +2,7 @@
 // Unlisted photo album of AutoLeaf price list displays, shared directly with customers.
 // Drop images in src/assets/shows/ — they are ordered by filename and split into
 // landscape/portrait automatically. Not linked from the nav; blocked in robots.txt.
+import '@fontsource-variable/inter';
 import '../../styles/global.css';
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
@@ -50,9 +51,6 @@ const sets = [
     <meta name="theme-color" content="#0B211D" />
     <link rel="icon" type="image/png" href={`${base}favicon.png`} />
     <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Shows | AutoLeaf Displays</title>
   </head>
   <body class="shows">

@@ -6,8 +6,6 @@ date: 2026-04-01
 tags: ["Wietproef", "Nieuws", "Regelgeving", "Kwaliteit"]
 ---
 
-# Wietproef April 2026: Kamerdebatten en Kwaliteitscontrole
-
 De Nederlandse wietproef blijft volop in de politieke en maatschappelijke belangstelling staan. In dit artikel bespreken we de belangrijkste ontwikkelingen van de afgelopen weken en wat deze betekenen voor coffeeshopondernemers.
 
 ## Eerste Commissiedebat Drugsbeleid onder Nieuw Kabinet
@@ -54,7 +52,7 @@ De wietproef loopt naar verwachting tot 2028. Coffeeshops die nu investeren in p
 
 ## Meer Weten?
 
-Wilt u ontdekken hoe AutoLeaf uw coffeeshop kan ondersteunen bij de uitdagingen van de moderne cannabismarkt? [Neem contact met ons op](/autoleaf-site/contact/) voor een vrijblijvende demo.
+Wilt u ontdekken hoe AutoLeaf uw coffeeshop kan ondersteunen bij de uitdagingen van de moderne cannabismarkt? [Neem contact met ons op](/contact/) voor een vrijblijvende demo.
 
 ---
 

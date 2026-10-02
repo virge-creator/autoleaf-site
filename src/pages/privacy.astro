@@ -1,0 +1,89 @@
+---
+import Layout from '../layouts/Layout.astro';
+const baseRaw = import.meta.env.BASE_URL;
+const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
+---
+
+<Layout title="Privacyverklaring" description="Hoe AutoLeaf Displays omgaat met persoonsgegevens die je via het contactformulier, de nieuwsbrief of deze website met ons deelt.">
+
+  <!-- Hero -->
+  <section class="hero py-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6">
+          <span class="text-leaf-light">Privacy</span>verklaring
+        </h1>
+        <p class="text-xl text-white/80">
+          Welke gegevens we verzamelen, waarom, en wat je rechten zijn.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-6 space-y-6 text-gray-700 leading-relaxed">
+      <p class="text-sm text-gray-500">Laatst bijgewerkt: 2 oktober 2026</p>
+
+      <h2 class="text-2xl font-bold text-charcoal">Wie zijn wij?</h2>
+      <p>
+        AutoLeaf Displays levert digitale menukaarten voor coffeeshops. Wij zijn verantwoordelijk voor de verwerking
+        van persoonsgegevens via autoleaf.nl. Vragen over privacy kun je sturen naar
+        <a href="mailto:info@autoleaf.nl" class="text-leaf hover:underline">info@autoleaf.nl</a>.
+      </p>
+
+      <h2 class="text-2xl font-bold text-charcoal">Welke gegevens verwerken we?</h2>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>
+          <strong>Contactformulier:</strong> je naam, de naam van je coffeeshop, e-mailadres, telefoonnummer,
+          kassasysteem en je bericht. We gebruiken deze gegevens alleen om je vraag te beantwoorden en, als je
+          daarom vraagt, een demo in te plannen.
+        </li>
+        <li>
+          <strong>Nieuwsbrief:</strong> je e-mailadres, om je de nieuwsbrief te sturen. Je kunt je op elk moment
+          afmelden door een mail te sturen naar info@autoleaf.nl.
+        </li>
+        <li>
+          <strong>Bezoek aan de website:</strong> zoals elke website ontvangt onze hostingpartij technische gegevens
+          zoals je IP-adres en browsertype om de site te kunnen tonen.
+        </li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-charcoal">Cookies en statistieken</h2>
+      <p>
+        Deze website plaatst geen cookies en gebruikt geen tracking- of statistiekentools.
+      </p>
+
+      <h2 class="text-2xl font-bold text-charcoal">Met wie delen we gegevens?</h2>
+      <p>We verkopen je gegevens nooit. We maken wel gebruik van een aantal dienstverleners:</p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li><strong>Formspree</strong> verwerkt de formulieren op deze site en stuurt ze naar ons door.</li>
+        <li><strong>GitHub Pages</strong> host deze website.</li>
+        <li><strong>jsDelivr</strong> levert de grafiekbibliotheek die in sommige blogartikelen wordt geladen.</li>
+      </ul>
+      <p>
+        Sommige van deze partijen zijn gevestigd buiten de Europese Economische Ruimte. Zij verwerken gegevens op
+        basis van passende waarborgen, zoals het EU-VS Data Privacy Framework of standaardcontractbepalingen.
+      </p>
+
+      <h2 class="text-2xl font-bold text-charcoal">Hoe lang bewaren we gegevens?</h2>
+      <p>
+        Berichten via het contactformulier bewaren we zolang dat nodig is om je vraag af te handelen en een eventuele
+        klantrelatie te onderhouden. Je inschrijving voor de nieuwsbrief bewaren we tot je je afmeldt.
+      </p>
+
+      <h2 class="text-2xl font-bold text-charcoal">Je rechten</h2>
+      <p>
+        Je hebt het recht om je gegevens in te zien, te laten corrigeren of te laten verwijderen, en om bezwaar te
+        maken tegen de verwerking. Stuur hiervoor een mail naar
+        <a href="mailto:info@autoleaf.nl" class="text-leaf hover:underline">info@autoleaf.nl</a>. Ben je het niet
+        eens met hoe we met je gegevens omgaan, dan kun je een klacht indienen bij de
+        <a href="https://autoriteitpersoonsgegevens.nl" class="text-leaf hover:underline" rel="noopener">Autoriteit Persoonsgegevens</a>.
+      </p>
+
+      <p class="pt-6">
+        <a href={`${base}contact/`} class="btn-primary">Contact opnemen →</a>
+      </p>
+    </div>
+  </section>
+
+</Layout>

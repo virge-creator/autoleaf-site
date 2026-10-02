@@ -1,10 +1,17 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import slide1 from '../assets/screenshots/slide-1.jpg';
+import slide2 from '../assets/screenshots/slide-2.jpg';
+import slide3 from '../assets/screenshots/slide-3.jpg';
+import slide4 from '../assets/screenshots/slide-4.jpg';
+import slide5 from '../assets/screenshots/slide-5.jpg';
+import slide6 from '../assets/screenshots/slide-6.jpg';
 const baseRaw = import.meta.env.BASE_URL;
 const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
 ---
 
-<Layout title="Home" description="AutoLeaf Displays - Professionele digitale menukaarten voor coffeeshops. Real-time prijslijsten op grote schermen, mobiele app voor productinfo, en kassa-integraties.">
+<Layout title="Digitale menukaart voor coffeeshops" description="Digitale menukaarten voor coffeeshops: real-time prijslijsten op grote schermen, automatische voorraad-updates, een mobiele app en kassa-integraties." organization>
   
   <!-- Hero Section -->
   <section class="hero min-h-[85vh] flex items-start lg:pt-20 relative">
@@ -35,7 +42,7 @@ const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
           <!-- Carousel with external arrows -->
           <div class="flex items-center gap-3">
             <!-- Prev arrow -->
-            <button class="flex-shrink-0 bg-white/10 hover:bg-white/20 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all" id="carousel-prev">
+            <button class="flex-shrink-0 bg-white/10 hover:bg-white/20 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all" id="carousel-prev" aria-label="Vorige afbeelding">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
             </button>
             
@@ -43,40 +50,40 @@ const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
             <div class="overflow-hidden rounded-xl flex-grow">
               <div class="carousel-track flex transition-transform duration-500 ease-in-out" id="carousel-track">
                 <div class="carousel-slide w-full flex-shrink-0 px-2">
-                  <img src={`${base}screenshots/slide-1.jpg`} alt="AutoLeaf menukaart display" class="rounded-xl shadow-lg w-full" />
+                  <Image src={slide1} alt="AutoLeaf menukaart display" widths={[480, 800, 1253]} sizes="(min-width: 1024px) 560px, 90vw" format="webp" loading="eager" fetchpriority="high" class="rounded-xl shadow-lg w-full h-auto" />
                 </div>
                 <div class="carousel-slide w-full flex-shrink-0 px-2">
-                  <img src={`${base}screenshots/slide-2.jpg`} alt="Coffeeshop Mississippi menukaart" class="rounded-xl shadow-lg w-full" />
+                  <Image src={slide2} alt="Coffeeshop Mississippi menukaart" widths={[480, 800, 1253]} sizes="(min-width: 1024px) 560px, 90vw" format="webp" class="rounded-xl shadow-lg w-full h-auto" />
                 </div>
                 <div class="carousel-slide w-full flex-shrink-0 px-2">
-                  <img src={`${base}screenshots/slide-3.jpg`} alt="AutoLeaf admin dashboard" class="rounded-xl shadow-lg w-full" />
+                  <Image src={slide3} alt="AutoLeaf admin dashboard" widths={[480, 800, 1253]} sizes="(min-width: 1024px) 560px, 90vw" format="webp" class="rounded-xl shadow-lg w-full h-auto" />
                 </div>
                 <div class="carousel-slide w-full flex-shrink-0 px-2">
-                  <img src={`${base}screenshots/slide-4.jpg`} alt="Kiosk Mode" class="rounded-xl shadow-lg w-full" />
+                  <Image src={slide4} alt="Kiosk Mode" widths={[480, 800, 1253]} sizes="(min-width: 1024px) 560px, 90vw" format="webp" class="rounded-xl shadow-lg w-full h-auto" />
                 </div>
                 <div class="carousel-slide w-full flex-shrink-0 px-2">
-                  <img src={`${base}screenshots/slide-5.jpg`} alt="Product detail pagina" class="rounded-xl shadow-lg w-full" />
+                  <Image src={slide5} alt="Product detail pagina" widths={[480, 800, 1253]} sizes="(min-width: 1024px) 560px, 90vw" format="webp" class="rounded-xl shadow-lg w-full h-auto" />
                 </div>
                 <div class="carousel-slide w-full flex-shrink-0 px-2">
-                  <img src={`${base}screenshots/slide-6.jpg`} alt="Coffeeshop partners" class="rounded-xl shadow-lg w-full" />
+                  <Image src={slide6} alt="Coffeeshop partners" widths={[480, 800, 1253]} sizes="(min-width: 1024px) 560px, 90vw" format="webp" class="rounded-xl shadow-lg w-full h-auto" />
                 </div>
               </div>
             </div>
             
             <!-- Next arrow -->
-            <button class="flex-shrink-0 bg-white/10 hover:bg-white/20 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all" id="carousel-next">
+            <button class="flex-shrink-0 bg-white/10 hover:bg-white/20 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all" id="carousel-next" aria-label="Volgende afbeelding">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </button>
           </div>
           
           <!-- Dots -->
           <div class="flex justify-center gap-2 mt-5" id="carousel-dots">
-            <button class="w-2.5 h-2.5 rounded-full bg-white/80 transition-all carousel-dot" data-index="0"></button>
-            <button class="w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/50 transition-all carousel-dot" data-index="1"></button>
-            <button class="w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/50 transition-all carousel-dot" data-index="2"></button>
-            <button class="w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/50 transition-all carousel-dot" data-index="3"></button>
-            <button class="w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/50 transition-all carousel-dot" data-index="4"></button>
-            <button class="w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/50 transition-all carousel-dot" data-index="5"></button>
+            <button class="w-2.5 h-2.5 box-content p-[7px] bg-clip-content rounded-full bg-white/80 transition-all carousel-dot" data-index="0" aria-label="Toon afbeelding 1"></button>
+            <button class="w-2.5 h-2.5 box-content p-[7px] bg-clip-content rounded-full bg-white/30 hover:bg-white/50 transition-all carousel-dot" data-index="1" aria-label="Toon afbeelding 2"></button>
+            <button class="w-2.5 h-2.5 box-content p-[7px] bg-clip-content rounded-full bg-white/30 hover:bg-white/50 transition-all carousel-dot" data-index="2" aria-label="Toon afbeelding 3"></button>
+            <button class="w-2.5 h-2.5 box-content p-[7px] bg-clip-content rounded-full bg-white/30 hover:bg-white/50 transition-all carousel-dot" data-index="3" aria-label="Toon afbeelding 4"></button>
+            <button class="w-2.5 h-2.5 box-content p-[7px] bg-clip-content rounded-full bg-white/30 hover:bg-white/50 transition-all carousel-dot" data-index="4" aria-label="Toon afbeelding 5"></button>
+            <button class="w-2.5 h-2.5 box-content p-[7px] bg-clip-content rounded-full bg-white/30 hover:bg-white/50 transition-all carousel-dot" data-index="5" aria-label="Toon afbeelding 6"></button>
           </div>
         </div>
       </div>

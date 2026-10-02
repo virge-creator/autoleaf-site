@@ -11,7 +11,7 @@ const sortedPosts = posts.sort((a, b) =>
 );
 ---
 
-<Layout title="Blog" description="Nieuws en inzichten over de Nederlandse wietproef, coffeeshop technologie en AutoLeaf updates.">
+<Layout title="Blog over de wietproef en coffeeshops" description="Nieuws en inzichten over de Nederlandse wietproef, coffeeshop technologie en AutoLeaf updates.">
   
   <!-- Hero -->
   <section class="hero py-16">
@@ -32,7 +32,7 @@ const sortedPosts = posts.sort((a, b) =>
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {sortedPosts.map((post) => (
-          <a href={post.url} class="blog-card group">
+          <a href={`${post.url}/`} class="blog-card group">
             <div class="p-6">
               <div class="flex items-center gap-3 text-sm text-gray-500 mb-3">
                 <time datetime={post.frontmatter.date}>

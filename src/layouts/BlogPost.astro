@@ -1,12 +1,52 @@
 ---
 import Layout from './Layout.astro';
 
-const { frontmatter } = Astro.props;
+const { frontmatter, url } = Astro.props;
 const baseRaw = import.meta.env.BASE_URL;
 const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
+
+const postUrl = new URL(`${url}/`, Astro.site).href;
+const homeUrl = new URL(base, Astro.site).href;
+const blogUrl = new URL(`${base}blog/`, Astro.site).href;
+
+// "Lees ook": the most recent other posts
+const postFiles = import.meta.glob('../pages/blog/*.md', { eager: true });
+const relatedPosts = (Object.values(postFiles) as any[])
+  .filter((post) => post.url !== url)
+  .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+  .slice(0, 3);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    datePublished: new Date(frontmatter.date).toISOString().slice(0, 10),
+    inLanguage: 'nl-NL',
+    mainEntityOfPage: postUrl,
+    image: new URL(`${base}menu-preview.jpg`, Astro.site).href,
+    author: { '@type': 'Organization', name: 'AutoLeaf Displays', url: homeUrl },
+    publisher: {
+      '@type': 'Organization',
+      name: 'AutoLeaf Displays',
+      logo: { '@type': 'ImageObject', url: new URL(`${base}logo-square.jpg`, Astro.site).href },
+    },
+    ...(frontmatter.tags && { keywords: frontmatter.tags.join(', ') }),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: homeUrl },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: blogUrl },
+      { '@type': 'ListItem', position: 3, name: frontmatter.title, item: postUrl },
+    ],
+  },
+];
 ---
 
-<Layout title={frontmatter.title} description={frontmatter.description}>
+<Layout title={frontmatter.title} description={frontmatter.description} ogType="article" jsonLd={jsonLd}>
   <article class="py-12">
     <div class="max-w-3xl mx-auto px-6">
       <!-- Back link -->
@@ -47,9 +87,26 @@ const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
         </div>
       )}
       
+      <!-- Related posts -->
+      {relatedPosts.length > 0 && (
+        <nav class="mt-12" aria-labelledby="lees-ook">
+          <h2 id="lees-ook" class="text-xl font-bold mb-4">Lees ook</h2>
+          <ul class="space-y-3">
+            {relatedPosts.map((post) => (
+              <li>
+                <a href={`${post.url}/`} class="text-leaf hover:underline font-medium">{post.frontmatter.title}</a>
+              </li>
+            ))}
+            <li>
+              <a href={`${base}functies/`} class="text-leaf hover:underline font-medium">Alle functies van AutoLeaf Displays</a>
+            </li>
+          </ul>
+        </nav>
+      )}
+
       <!-- CTA -->
       <div class="mt-12 p-8 bg-cream rounded-2xl text-center">
-        <h3 class="text-xl font-bold mb-2">Interesse in AutoLeaf?</h3>
+        <h2 class="text-xl font-bold mb-2">Interesse in AutoLeaf?</h2>
         <p class="text-gray-600 mb-4">Ontdek hoe wij uw coffeeshop kunnen digitaliseren.</p>
         <a href={`${base}contact/`} class="btn-primary">Contact →</a>
       </div>

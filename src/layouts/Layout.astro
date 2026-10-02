@@ -1,15 +1,54 @@
 ---
+import '@fontsource-variable/inter';
 import '../styles/global.css'
 
 interface Props {
   title: string;
   description?: string;
+  ogType?: 'website' | 'article';
+  /** Extra JSON-LD objects for this page */
+  jsonLd?: object[];
+  /** Include the Organization JSON-LD (homepage) */
+  organization?: boolean;
 }
 
-const { title, description = "AutoLeaf Displays - Professionele digitale menukaarten voor coffeeshops in de Nederlandse wietproef" } = Astro.props;
+const {
+  title,
+  description = "AutoLeaf Displays - Professionele digitale menukaarten voor coffeeshops in de Nederlandse wietproef",
+  ogType = 'website',
+  jsonLd = [],
+  organization = false,
+} = Astro.props;
 const baseRaw = import.meta.env.BASE_URL;
 const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
 const path = Astro.url.pathname;
+
+const siteName = 'AutoLeaf Displays';
+// Keep <title> within ~60 chars: drop the brand suffix for long titles
+const fullTitle = `${title} | ${siteName}`.length <= 60 ? `${title} | ${siteName}` : title;
+const canonical = new URL(path.endsWith('/') ? path : `${path}/`, Astro.site).href;
+const ogImage = new URL(`${base}menu-preview.jpg`, Astro.site).href;
+
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: siteName,
+  url: new URL(base, Astro.site).href,
+  logo: new URL(`${base}logo-square.jpg`, Astro.site).href,
+  description: 'Digitale menukaarten voor coffeeshops: real-time prijslijsten op schermen, mobiele app en kassa-integraties.',
+  email: 'info@autoleaf.nl',
+  telephone: '+31495794123',
+  areaServed: 'NL',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: 'info@autoleaf.nl',
+    telephone: '+31495794123',
+    url: new URL(`${base}contact/`, Astro.site).href,
+    availableLanguage: 'nl',
+  },
+};
+const structuredData = organization ? [organizationLd, ...jsonLd] : jsonLd;
 
 const navItems = [
   { href: `${base}`, label: 'Home', match: (p: string) => p === '/' || p === base },
@@ -27,10 +66,23 @@ const navItems = [
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" href={`${base}favicon.png`} />
     <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <title>{title} | AutoLeaf Displays</title>
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href={`${base}sitemap-index.xml`} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="nl_NL" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1253" />
+    <meta property="og:image:height" content="714" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{fullTitle}</title>
+    {structuredData.map((data) => (
+      <script type="application/ld+json" set:html={JSON.stringify(data)} />
+    ))}
   </head>
   <body class="flex flex-col min-h-screen">
     <!-- Navigation -->
@@ -39,7 +91,7 @@ const navItems = [
         <div class="flex items-center justify-between">
           <a href={`${base}`} class="flex items-center gap-3">
             <!-- Mobile: icon logo -->
-            <img src={`${base}logo-wide.png`} alt="AutoLeaf Displays" class="h-10 md:h-12" />
+            <img src={`${base}logo-wide.png`} alt="AutoLeaf Displays" width="1200" height="258" class="h-10 md:h-12 w-auto" />
           </a>
           <div class="show-on-desktop items-center gap-8 text-sm font-medium">
             {navItems.map(item => (
@@ -57,7 +109,7 @@ const navItems = [
             <a href={`${base}contact/`} class={`text-sm !py-2 !px-4 ${path.includes('contact') ? 'btn-primary-active' : 'btn-primary'}`}>Contact</a>
           </div>
           <!-- Mobile menu button -->
-          <button class="hide-on-desktop text-white text-2xl" id="mobile-menu-btn">☰</button>
+          <button class="hide-on-desktop text-white text-2xl" id="mobile-menu-btn" aria-label="Menu openen" aria-controls="mobile-menu" aria-expanded="false">☰</button>
         </div>
         <!-- Mobile menu -->
         <div class="hide-on-desktop pt-4 pb-2" id="mobile-menu" style="display:none;">
@@ -90,14 +142,14 @@ const navItems = [
         <div class="grid md:grid-cols-4 gap-12 mb-12">
           <div class="md:col-span-2">
             <div class="flex items-center gap-3 mb-4">
-              <img src={`${base}logo-icon.png`} alt="AutoLeaf" class="h-16 opacity-90" />
+              <img src={`${base}logo-icon.png`} alt="AutoLeaf" width="1200" height="1119" loading="lazy" class="h-16 w-auto opacity-90" />
             </div>
             <p class="text-sm opacity-80 max-w-sm">
               Professionele digitale menukaarten en product-informatie systemen voor coffeeshops in de Nederlandse wietproef.
             </p>
           </div>
           <div>
-            <h4 class="text-white font-semibold mb-4">Navigatie</h4>
+            <h2 class="text-base text-white font-semibold mb-4">Navigatie</h2>
             <ul class="space-y-2 text-sm">
               <li><a href={`${base}functies/`}>Functies</a></li>
               <li><a href={`${base}integraties/`}>Integraties</a></li>
@@ -106,18 +158,17 @@ const navItems = [
             </ul>
           </div>
           <div>
-            <h4 class="text-white font-semibold mb-4">Contact</h4>
+            <h2 class="text-base text-white font-semibold mb-4">Contact</h2>
             <ul class="space-y-2 text-sm">
               <li>📧 <a href="mailto:info@autoleaf.nl">info@autoleaf.nl</a></li>
               <li>📍 Nederland</li>
             </ul>
           </div>
         </div>
-        <div class="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm opacity-60">
+        <div class="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm opacity-80">
           <p>© 2026 AutoLeaf Displays — Alle rechten voorbehouden</p>
           <div class="flex gap-6">
-            <a href={`${base}privacy/`} class="hover:text-white">Privacy</a>
-            <a href={`${base}voorwaarden/`} class="hover:text-white">Voorwaarden</a>
+            <a href={`${base}privacy/`} class="hover:text-white">Privacyverklaring</a>
           </div>
         </div>
       </div>
@@ -131,7 +182,11 @@ const navItems = [
       function toggleMenu() {
         isOpen = !isOpen;
         if (menu) menu.style.display = isOpen ? 'block' : 'none';
-        if (btn) btn.textContent = isOpen ? '✕' : '☰';
+        if (btn) {
+          btn.textContent = isOpen ? '✕' : '☰';
+          btn.setAttribute('aria-expanded', String(isOpen));
+          btn.setAttribute('aria-label', isOpen ? 'Menu sluiten' : 'Menu openen');
+        }
       }
 
       btn?.addEventListener('click', toggleMenu);

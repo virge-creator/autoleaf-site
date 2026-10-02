@@ -6,8 +6,6 @@ date: 2026-03-26
 tags: ["Wietproef", "Nieuws", "Regelgeving"]
 ---
 
-# Wietproef 2026: Stand van Zaken
-
 De Nederlandse wietproef, officieel het "Experiment gesloten coffeeshopketen", is nu volop in gang. In dit artikel geven we een update over de huidige stand van zaken en wat dit betekent voor coffeeshops.
 
 ## Deelnemende gemeenten
@@ -61,7 +59,7 @@ De wietproef loopt naar verwachting tot **2028**. Daarna evalueert de overheid o
 
 ## Meer informatie
 
-Wilt u weten hoe AutoLeaf uw coffeeshop kan helpen om te voldoen aan de eisen van de wietproef? [Neem contact met ons op](/autoleaf-site/contact/) voor een vrijblijvende demo.
+Wilt u weten hoe AutoLeaf uw coffeeshop kan helpen om te voldoen aan de eisen van de wietproef? [Neem contact met ons op](/contact/) voor een vrijblijvende demo.
 
 ---
 
